@@ -11,12 +11,22 @@
     --success-color: #28a745;
 }
 
+/* ADD THIS RULE FOR HTML */
+html {
+    height: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
+
+    /* ADD THESE 3 LINES TO THE BODY */
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Use min-height to ensure it fills at least the screen */
 }
 
 /* --- Header Styles --- */
@@ -86,7 +96,18 @@ body {
     background-color: #0056b3;
 }
 
+
+
 /* --- Main Content Area --- */
+
+/* ADD THIS ENTIRE NEW RULE FOR .main-content */
+/* This targets the <main> tag from your header partial */
+.main-content {
+    flex-grow: 1; /* This is the magic line that makes it expand */
+    display: flex;
+    flex-direction: column;
+}
+
 .page-container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -94,6 +115,10 @@ body {
     background-color: var(--header-bg);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    /* ADD THESE 2 LINES TO .page-container */
+    width: 100%; /* Ensures it respects the max-width */
+    box-sizing: border-box; /* Includes padding in the width calculation */
 }
 
 .page-container h1 {
@@ -105,6 +130,7 @@ body {
 /* --- User Table Styles --- */
 .user-table-container {
     margin-top: 2rem;
+    overflow-x: auto; /* Added for responsiveness */
 }
 
 .user-table {
@@ -118,6 +144,7 @@ body {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap; /* Prevents forms from wrapping */
 }
 
 .user-table th {
@@ -129,7 +156,7 @@ body {
     background-color: #f1f3f5;
 }
 
-/* --- Action Button Styles --- */
+/* --- Action Button Styles (Works for <a> and <button>) --- */
 .btn-action {
     display: inline-block;
     padding: 0.375rem 0.75rem;
@@ -139,6 +166,10 @@ body {
     border-radius: 5px;
     margin-right: 5px;
     transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    color: var(--text-light);
+    font-family: inherit;
 }
 
 .btn-action.edit {
@@ -159,9 +190,58 @@ body {
     background-color: #c82333;
 }
 
-/* --- Add this to dashboard-style.css --- */
+/* --- NEW User Management Form Styles --- */
 
-/* Support Tickets Table */
+.actions-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between the 'edit' and 'delete' forms */
+}
+
+.user-action-form {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Space between select and button */
+}
+
+.user-action-form select {
+    padding: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.btn-action:disabled,
+.user-action-form select:disabled {
+    background-color: #ccc;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* NEW Role Badge Styles */
+.role-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.role-admin {
+    background-color: #d1e7dd; /* Green */
+    color: #0f5132;
+}
+
+.role-user {
+    background-color: #cff4fc; /* Blue */
+    color: #055160;
+}
+
+
+/* --- Support Tickets Table --- */
 .ticket-list-container {
     overflow-x: auto;
     width: 100%;
@@ -202,7 +282,7 @@ body {
 
 .support-ticket-table td[data-label="From"] a {
     font-size: 0.85rem;
-    color: #007bff;
+    color: var(--primary-color);
     text-decoration: none;
 }
 .support-ticket-table td[data-label="From"] a:hover {
@@ -219,14 +299,14 @@ body {
     white-space: nowrap;
 }
 .status-new {
-    background-color: #007bff; /* Blue */
+    background-color: var(--primary-color); /* Blue */
 }
 .status-in-progress {
     background-color: #ffc107; /* Yellow */
     color: #333;
 }
 .status-resolved {
-    background-color: #28a745; /* Green */
+    background-color: var(--success-color); /* Green */
 }
 
 /* Ticket Actions Form */
@@ -244,7 +324,7 @@ body {
 }
 .ticket-actions .btn-update {
     padding: 8px 12px;
-    background-color: #28a745;
+    background-color: var(--success-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -271,7 +351,7 @@ body {
 .ticket-message .view-more {
     display: block;
     font-size: 0.8rem;
-    color: #007bff;
+    color: var(--primary-color);
     margin-top: 5px;
     text-decoration: underline;
 }
@@ -284,4 +364,20 @@ body {
     border-top: 1px dashed #ccc;
     white-space: pre-wrap; /* Preserve line breaks in the message */
     word-break: break-word;
+}
+
+/* --- Footer Styles --- */
+.client-footer {
+    width: 100%;
+    padding: 1.5rem 2rem; /* Give it some space */
+    background-color: var(--header-bg);
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+    margin-top: auto; /* Pushes it to the bottom of the flex container (body) */
+}
+
+.client-footer p {
+    text-align: center; /* This is the line that centers the text */
+    margin: 0; /* Remove default paragraph margin */
+    color: var(--secondary-color);
 }

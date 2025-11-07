@@ -113,10 +113,11 @@ h2 {
 .nav-button {
     background-color: var(--primary-color);
     color: #fff !important;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.3rem;
+    border-radius: 5px;
     border-radius: var(--border-radius);
     font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .nav-button:hover {

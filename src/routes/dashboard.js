@@ -9,9 +9,18 @@ router.get('/', ensureAuth, ensureAdmin, dashboardController.getDashboard);
 // Support Tickets Page
 router.get('/support-tickets', ensureAuth, ensureAdmin, dashboardController.getSupportTickets);
 
-// --- ADD THIS ROUTE FOR UPDATING TICKET STATUS ---
+// Update Ticket Status
 router.post('/tickets/update-status/:id', ensureAuth, ensureAdmin, dashboardController.updateSupportTicketStatus);
 
-// Removed the other routes
+// --- ADD THESE ROUTES FOR USER MANAGEMENT ---
+
+// @desc    Update user role
+// @route   POST /dashboard/users/update-role/:id
+router.post('/users/update-role/:id', ensureAuth, ensureAdmin, dashboardController.updateUserRole);
+
+// @desc    Delete user
+// @route   POST /dashboard/users/delete/:id
+router.post('/users/delete/:id', ensureAuth, ensureAdmin, dashboardController.deleteUser);
+
 
 module.exports = router;
