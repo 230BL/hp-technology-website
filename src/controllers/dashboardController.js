@@ -5,20 +5,23 @@ const db = require('../config/db');
 // @route   GET /dashboard
 exports.getDashboard = async (req, res) => {
     try {
-        // ... (your existing getDashboard code is here)
+        // 1. Fetch all users from the database
+        const [users] = await db.query('SELECT id, name, email, type FROM Users');
         
-        // 3. Render the dashboard and pass the users data to the template
+        // 2. Render the dashboard and pass the users data to the template
         res.render('dashboard/index', {
             user: req.session.user, 
-            users: users,
-            title: 'Dashboard' // Optional: Pass a title
+            users: users, // Now the 'users' variable exists
+            title: 'Dashboard'
         });
+
     } catch (err) {
-        // ... (your existing error handling)
+        // 3. IMPORTANT: Handle any errors
+        console.error('Dashboard Error:', err);
+        res.status(500).send('Server Error');
     }
 };
 
-// --- ADD THIS NEW FUNCTION ---
 // @desc    Get Support Tickets page
 // @route   GET /dashboard/support-tickets
 exports.getSupportTickets = (req, res) => {
@@ -26,10 +29,10 @@ exports.getSupportTickets = (req, res) => {
         // Just render the page
         res.render('dashboard/support-tickets', {
             user: req.session.user, // Pass the user for the header
-            title: 'Support Tickets' // Optional: Pass a title
+            title: 'Support Tickets'
         });
     } catch (err) {
-        console.error('Error:', err);
+        console.error('Support Tickets Error:', err);
         res.status(500).send('Server Error');
     }
 };
