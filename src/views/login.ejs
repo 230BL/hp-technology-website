@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HP TECHNOLOGY</title>
+    
+    <!-- Link to the stylesheet -->
+    <link rel="stylesheet" href="/css/client-style.css">
+    
+    <!-- Adding a modern font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-page-body">
+
+    <div class="login-card">
+        <!-- Add the logo here -->
+        <img src="/images/hptech.png" alt="HP TECHNOLOGY Logo" class="login-logo"
+             onerror="this.onerror=null; this.src='https://placehold.co/150x150/007aff/FFFFFF?text=HP+TECH&font=inter';">
+
+        <h2>Admin & Client Login</h2>
+        <p>Please log in to access the dashboard.</p>
+
+        <!-- Display Error Messages -->
+        <% if (messages && messages.error) { %>
+            <div class="login-error">
+                <%= messages.error %>
+            </div>
+        <% } %>
+
+        <form action="/auth/login" method="POST" class="contact-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="nav-button">Login</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

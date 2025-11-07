@@ -1,6 +1,72 @@
 <%- include('../partials/client-header') %>
 
-<h2>Contact / Assistance Technique</h2>
-<p>This is where your support request form will go.</p>
+<div class="contact-page-container">
+    <h2 class="page-title">Contact & Support</h2>
+    <p class="page-subtitle">We're here to help. Choose an option below to get in touch with our team.</p>
+
+    <div class="contact-layout">
+        
+        <!-- Column 1: Direct Contact Info -->
+        <div class="contact-info">
+            <h3>Get in Touch Directly</h3>
+            <p>For general inquiries, sales, or urgent support, feel free to reach out to us using the details below.</p>
+            
+            <div class="contact-item">
+                <strong>Email</strong>
+                <a href="mailto:hptechnology.sarl@gmail.com">hptechnology.sarl@gmail.com</a>
+            </div>
+            
+            <div class="contact-item">
+                <strong>Phone</strong>
+                <span>+212 600-824-961</span>
+            </div>
+            
+            <div class="contact-item">
+                <strong>Our Address</strong>
+                <span>Lotissement erraha, 846<br>Laayoune, 70000</span>
+            </div>
+        </div>
+
+        <!-- Column 2: Contact Form -->
+        <div class="contact-form-wrapper">
+            <h3>Send a Support Request</h3>
+            <form action="/contact" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Related Service (Optional)</label>
+                    <select id="service" name="service">
+                        <option value="">-- Select a service --</option>
+                        <option value="hardware">Matériels & Logiciels</option>
+                        <option value="network">Réseaux & Communication</option>
+                        <option value="training">Formation & Accompagnement</option>
+                        <option value="security">Cybersecurity & Data Protection</option>
+                        <option value="cloud">Cloud Solutions & Infrastructure</option>
+                        <option value="managed-it">Managed IT & Support</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">How can we help?</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="nav-button">Send Message</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
 
 <%- include('../partials/footer') %>

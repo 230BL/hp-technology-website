@@ -1,6 +1,40 @@
 <%- include('../partials/client-header') %>
 
-<h2>Welcome to the Client Homepage!</h2>
-<p>This is your public-facing website for "Matériels & Logiciels", "Réseaux", etc.</p>
+<section class="hero-section">
+    <div class="hero-text">
+        <h2>Your Partner in Technology Solutions</h2>
+        <p>Welcome to <strong>HP TECHNOLOGY</strong>. We are your dedicated experts in providing comprehensive IT services. From hardware and software solutions to robust network infrastructures and professional training, we are here to support your business every step of the way.</p>
+        <a href="/contact" class="nav-button">Get Support Now</a>
+    </div>
+    <div class="hero-image">
+        <img src="/images/hptech.png" alt="HP TECHNOLOGY Logo" class="hero-logo"
+             onerror="this.onerror=null; this.src='https://placehold.co/400x400/007aff/FFFFFF?text=HP+TECH&font=inter';">
+    </div>
+</section>
+
+<section class="services-section">
+    <h2>Our Services</h2>
+    <div class="service-cards-container">
+        
+        <div class="service-card">
+            <h3>Matériels & Logiciels</h3>
+            <p>We provide and maintain all your essential hardware and software, ensuring your systems are always up-to-date and running smoothly.</p>
+            <a href="/services" class="card-link">Learn More</a>
+        </div>
+        
+        <div class="service-card">
+            <h3>Réseaux & Communication</h3>
+            <p>Our experts design and manage secure, high-performance network and communication systems tailored to your company's needs.</p>
+            <a href="/services" class="card-link">Learn More</a>
+        </div>
+        
+        <div class="service-card">
+            <h3>Formation & Accompagnement</h3>
+            <p>Empower your team with our professional training and ongoing support, helping you make the most of your technology investment.</p>
+            <a href="/services" class="card-link">Learn More</a>
+        </div>
+
+    </div>
+</section>
 
 <%- include('../partials/footer') %>
