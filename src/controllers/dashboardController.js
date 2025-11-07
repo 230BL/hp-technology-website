@@ -5,19 +5,31 @@ const db = require('../config/db');
 // @route   GET /dashboard
 exports.getDashboard = async (req, res) => {
     try {
-        // 1. Create the SQL query
-        const sql = 'SELECT id, name, email, type FROM Users';
+        // ... (your existing getDashboard code is here)
         
-        // 2. Execute the query
-        const [users] = await db.query(sql);
-
         // 3. Render the dashboard and pass the users data to the template
         res.render('dashboard/index', {
-            user: req.session.user, // <-- CHANGED FROM req.user
-            users: users    
+            user: req.session.user, 
+            users: users,
+            title: 'Dashboard' // Optional: Pass a title
         });
     } catch (err) {
-        console.error('Database query error:', err);
+        // ... (your existing error handling)
+    }
+};
+
+// --- ADD THIS NEW FUNCTION ---
+// @desc    Get Support Tickets page
+// @route   GET /dashboard/support-tickets
+exports.getSupportTickets = (req, res) => {
+    try {
+        // Just render the page
+        res.render('dashboard/support-tickets', {
+            user: req.session.user, // Pass the user for the header
+            title: 'Support Tickets' // Optional: Pass a title
+        });
+    } catch (err) {
+        console.error('Error:', err);
         res.status(500).send('Server Error');
     }
 };

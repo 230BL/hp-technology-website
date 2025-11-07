@@ -1,52 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/dashboard-style.css">
-</head>
-<body>
-    <%- include('../partials/dashboard-header') %>
+<%- include('../partials/dashboard-header', { 
+    title: 'Dashboard', 
+    user: user 
+}) %>
 
-    <main class="dashboard-container">
-        <h2>User Management</h2>
+<div class="page-container">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome to the admin panel. You can manage site users from here.</p>
 
-        <table class="dashboard-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Type</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (typeof users !== 'undefined' && users.length > 0) { %>
-                    <% users.forEach(user => { %>
+    <% if (users && users.length > 0) { %>
+        <div class="user-table-container">
+            <h3>Manage Users</h3>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(u => { %>
                         <tr>
-                            <td><%= user.name %></td>
-                            <td><%= user.email %></td>
-                            <td><%= user.type %></td>
-                            <td class="actions">
-                                <a href="/dashboard/edit-user/<%= user.id %>" class="btn btn-modify">Modify</a>
-                                
-                                <form action="/dashboard/delete-user/<%= user.id %>" method="POST" class="delete-form">
-                                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
-                                </form>
+                            <td><%= u.id %></td>
+                            <td><%= u.name %></td>
+                            <td><%= u.email %></td>
+                            <td><%= u.type %></td>
+                            <td>
+                                <a href="#" class="btn-action edit">Edit</a>
+                                <a href="#" class="btn-action delete">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="4" style="text-align: center;">No users found.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
-    </main>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <p>No users found in the database.</p>
+    <% } %>
 
-    
-</body>
-</html>
+</div>
+
 <%- include('../partials/footer') %>

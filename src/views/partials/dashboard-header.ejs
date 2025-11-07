@@ -1,17 +1,33 @@
-<header class="dashboard-header">
-    <div class="header-content">
-        <div class="logo-container">
-            <img src="/images/hptech.png" alt="HP Technology Logo" class="logo">
-            <span class="header-title">Admin Dashboard</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title><%= typeof title !== 'undefined' ? title : 'Admin Dashboard' %> | HP Tech</title>
+    
+    <link rel="stylesheet" href="/css/dashboard-style.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="dash-logo">
+            <a href="/dashboard">
+                <img src="/images/hptech.png" alt="HP Technology Logo">
+                <span>Admin Panel</span>
+            </a>
         </div>
-        <nav class="dashboard-nav">
-            <ul>
-                <% if (typeof user !== 'undefined' && user) { %>
-                    <li class="welcome-message">Welcome, <%= user.name %>!</li>
-                <% } %>
-                <li><a href="/dashboard">User Management</a></li>
-                <li><a href="/logout" class="logout-btn">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+        
+        <nav class="dash-nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard/support-tickets">Support Tickets</a>
+            </nav>
+
+        <div class="user-actions">
+            <% if (user) { %>
+                <span class="welcome-msg">Welcome, <%= user.name %></span>
+            <% } %>
+            <a href="/auth/logout" class="logout-button">Log Out</a>
+        </div>
+    </header>
+
+    <main class="main-content">
