@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/css/auth-style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <form action="/auth/login" method="POST" class="auth-form">
+            <img src="/images/hptech.png" alt="HP Technology Logo" class="auth-logo">
+            <h2>Admin Login</h2>
+
+            <% if (typeof message !== 'undefined' && message.length > 0) { %>
+                <div class="auth-error">
+                    <%= message %>
+                </div>
+            <% } %>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-auth">Login</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const dashboardController = require('../controllers/dashboardController');
-// We will add protection here
-const { isEmployee } = require('../middleware/authMiddleware');
+const { ensureAuth, ensureAdmin } = require('../middleware/authMiddleware');
 
-// Dashboard Home (e.g., /dashboard)
-// We will add 'isEmployee' middleware here to protect it
-router.get('/', dashboardController.getDashboardHome);
+// Dashboard Main Page
+router.get('/', ensureAuth, ensureAdmin, dashboardController.getDashboard);
 
-// Manage Products Page (e.g., /dashboard/products)
-router.get('/products', dashboardController.getProductsPage);
+// Removed the other routes
 
 module.exports = router;
