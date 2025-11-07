@@ -13,13 +13,11 @@ exports.getDashboard = async (req, res) => {
 
         // 3. Render the dashboard and pass the users data to the template
         res.render('dashboard/index', {
-            user: req.user, // This passes the currently logged-in user (from auth)
-            users: users    // This passes the list of all users for the table
+            user: req.session.user, // <-- CHANGED FROM req.user
+            users: users    
         });
     } catch (err) {
         console.error('Database query error:', err);
         res.status(500).send('Server Error');
     }
 };
-
-// Removed the other controller functions

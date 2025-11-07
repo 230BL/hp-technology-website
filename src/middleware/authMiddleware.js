@@ -1,12 +1,23 @@
 // in: src/middleware/authMiddleware.js
 
-// This middleware will protect our dashboard
-exports.isEmployee = (req, res, next) => {
+// This middleware checks if a user is logged in
+exports.ensureAuth = (req, res, next) => {
+    if (req.session.user) {
+        return next(); // User is logged in, proceed
+    }
     
-    // This is where we'll check if a user is logged in
-    // and has the role 'employee' or 'admin'.
+    // User is not logged in, redirect to login
+    res.redirect('/auth/login');
+};
+
+// This middleware checks if a user is an Admin
+exports.ensureAdmin = (req, res, next) => {
+    // We already know they are logged in if this is chained after ensureAuth
+    // But it's good to check both just in case
+    if (req.session.user && req.session.user.type === 'admin') {
+        return next(); // User is an admin, proceed
+    }
     
-    // For now, we'll just log to the console and let everyone pass
-    console.log("Auth middleware check (isEmployee)... allowing access for development.");
-    next();
+    // User is logged in but not an admin
+    res.redirect('/');
 };

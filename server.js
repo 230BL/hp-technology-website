@@ -2,13 +2,10 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 
-// Load environment variables
-dotenv.config();
-
-// --- Database & Auth Setup (Simplified for now) ---
-// (We will add session/passport setup here later)
-// const session = require('express-session');
-// const passport = require('passport');
+// --- Database & Auth Setup ---
+// We will use express-session
+const session = require('express-session');
+// const passport = require('passport'); // REMOVED
 const db = require('./src/config/db');
 
 // --- Route Definitions ---
@@ -20,25 +17,27 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // --- Middleware ---
-// Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
-
-// Serve static files (CSS, images) from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// (Session & Passport middleware would go here)
+// --- ADD SESSION MIDDLEWARE ---
+// This must come BEFORE you mount the routes
+app.use(session({
+    secret: 'a-simple-secret-for-testing', // Change this to a random string
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}));
 
+// (Session & Passport middleware would go here) // REMOVED
 
 // --- MOUNT THE ROUTES ---
-// This is the core of the architecture
 app.use('/auth', authRoutes);
-app.use('/dashboard', dashboardRoutes); // All dashboard routes are prefixed with /dashboard
-app.use('/', clientRoutes);             // All client routes are at the root
+app.use('/dashboard', dashboardRoutes); 
+app.use('/', clientRoutes);             
 
 // --- Start Server ---
 app.listen(PORT, () => {
