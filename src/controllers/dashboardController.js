@@ -22,17 +22,47 @@ exports.getDashboard = async (req, res) => {
     }
 };
 
+// --- UPDATE THIS ENTIRE FUNCTION ---
 // @desc    Get Support Tickets page
 // @route   GET /dashboard/support-tickets
-exports.getSupportTickets = (req, res) => {
+exports.getSupportTickets = async (req, res) => {
     try {
-        // Just render the page
+        // 1. Fetch all tickets from the database, newest first
+        const [tickets] = await db.query('SELECT * FROM SupportTickets ORDER BY created_at DESC');
+
+        // 2. Render the page and pass the tickets data
         res.render('dashboard/support-tickets', {
             user: req.session.user, // Pass the user for the header
-            title: 'Support Tickets'
+            title: 'Support Tickets',
+            tickets: tickets // Pass the fetched tickets
         });
     } catch (err) {
         console.error('Support Tickets Error:', err);
+        res.status(500).send('Server Error');
+    }
+};
+
+// --- ADD THIS NEW FUNCTION ---
+// @desc    Update support ticket status
+// @route   POST /dashboard/tickets/update-status/:id
+exports.updateSupportTicketStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!status) {
+            return res.status(400).send('Status is required.');
+        }
+
+        // Update the status in the database
+        const sql = 'UPDATE SupportTickets SET status = ? WHERE id = ?';
+        await db.query(sql, [status, id]);
+
+        // Redirect back to the support tickets page
+        res.redirect('/dashboard/support-tickets');
+
+    } catch (err) {
+        console.error('Update Ticket Status Error:', err);
         res.status(500).send('Server Error');
     }
 };

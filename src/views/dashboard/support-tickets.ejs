@@ -2,7 +2,63 @@
 
 <div class="page-container">
     <h1>Support Tickets</h1>
-    <p>This is where you will manage customer support tickets.</p>
+
+    <% if (typeof tickets === 'undefined' || tickets.length === 0) { %>
+        <p>No new support tickets found.</p>
+    <% } else { %>
+        <div class="ticket-list-container">
+            <table class="support-ticket-table">
+                <thead>
+                    <tr>
+                        <th>Received</th>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tickets.forEach(ticket => { %>
+                        <tr>
+                            <td data-label="Received"><%= new Date(ticket.created_at).toLocaleString() %></td>
+                            <td data-label="From">
+                                <strong><%= ticket.name %></strong><br>
+                                <a href="mailto:<%= ticket.email %>"><%= ticket.email %></a>
+                            </td>
+                            <td data-label="Subject"><%= ticket.subject %></td>
+                            <td data-label="Message" class="ticket-message">
+                                <details>
+                                    <summary>
+                                        <%= ticket.message.substring(0, 100) %><% if (ticket.message.length > 100) { %>...<% } %>
+                                        <span class="view-more">(View <%= ticket.message.length > 100 ? 'More' : 'Details' %>)</span>
+                                    </summary>
+                                    <p><%= ticket.message %></p>
+                                </details>
+                            </td>
+                            <td data-label="Service"><%= ticket.service || 'N/A' %></td>
+                            <td data-label="Status">
+                                <span class="status-label status-<%= ticket.status.toLowerCase().replace(' ', '-') %>">
+                                    <%= ticket.status %>
+                                </span>
+                            </td>
+                            <td data-label="Actions">
+                                <form action="/dashboard/tickets/update-status/<%= ticket.id %>" method="POST" class="ticket-actions">
+                                    <select name="status">
+                                        <option value="New" <%= ticket.status === 'New' ? 'selected' : '' %>>New</option>
+                                        <option value="In Progress" <%= ticket.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                                        <option value="Resolved" <%= ticket.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
+                                    </select>
+                                    <button type="submit" class="btn-update">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
     
-    </div>
+</div>
 <%- include('../partials/footer') %>

@@ -6,9 +6,11 @@ const { ensureAuth, ensureAdmin } = require('../middleware/authMiddleware');
 // Dashboard Main Page
 router.get('/', ensureAuth, ensureAdmin, dashboardController.getDashboard);
 
-// --- ADD THIS ROUTE ---
 // Support Tickets Page
 router.get('/support-tickets', ensureAuth, ensureAdmin, dashboardController.getSupportTickets);
+
+// --- ADD THIS ROUTE FOR UPDATING TICKET STATUS ---
+router.post('/tickets/update-status/:id', ensureAuth, ensureAdmin, dashboardController.updateSupportTicketStatus);
 
 // Removed the other routes
 

@@ -11,4 +11,8 @@ router.get('/services', clientController.getServicesPage);
 // Contact Page (e.g., for "Assistance Technique" requests)
 router.get('/contact', clientController.getContactPage);
 
+// --- ADD THIS LINE ---
+// Handle Contact Form Submission
+router.post('/contact', clientController.postContactForm);
+
 module.exports = router;

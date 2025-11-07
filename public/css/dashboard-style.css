@@ -158,3 +158,130 @@ body {
 .btn-action.delete:hover {
     background-color: #c82333;
 }
+
+/* --- Add this to dashboard-style.css --- */
+
+/* Support Tickets Table */
+.ticket-list-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.support-ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.support-ticket-table thead {
+    background-color: #f9f9f9;
+}
+
+.support-ticket-table th,
+.support-ticket-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.support-ticket-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.support-ticket-table tr:nth-of-type(even) {
+    background-color: #fcfcfc;
+}
+
+.support-ticket-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.support-ticket-table td[data-label="From"] a {
+    font-size: 0.85rem;
+    color: #007bff;
+    text-decoration: none;
+}
+.support-ticket-table td[data-label="From"] a:hover {
+    text-decoration: underline;
+}
+
+/* Status Labels */
+.status-label {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+.status-new {
+    background-color: #007bff; /* Blue */
+}
+.status-in-progress {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+.status-resolved {
+    background-color: #28a745; /* Green */
+}
+
+/* Ticket Actions Form */
+.ticket-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 150px;
+}
+.ticket-actions select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+.ticket-actions .btn-update {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+.ticket-actions .btn-update:hover {
+    background-color: #218838;
+}
+
+/* Expandable Message */
+.ticket-message details {
+    cursor: pointer;
+}
+.ticket-message summary {
+    position: relative;
+    list-style: none; /* Hide default triangle */
+}
+.ticket-message summary::-webkit-details-marker {
+    display: none; /* Hide default triangle */
+}
+.ticket-message .view-more {
+    display: block;
+    font-size: 0.8rem;
+    color: #007bff;
+    margin-top: 5px;
+    text-decoration: underline;
+}
+.ticket-message details[open] .view-more {
+    display: none;
+}
+.ticket-message details p {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    white-space: pre-wrap; /* Preserve line breaks in the message */
+    word-break: break-word;
+}
