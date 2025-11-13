@@ -32,7 +32,15 @@ app.use(session({
     cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
 }));
 
-// (Session & Passport middleware would go here) // REMOVED
+// --- THIS IS THE NEW MIDDLEWARE TO FIX THE PROBLEM ---
+// Makes user data available to all templates
+app.use((req, res, next) => {
+    // res.locals makes this variable available in all EJS templates
+    res.locals.user = req.session.user || null;
+    next();
+});
+// ----------------------------------------------------
+
 
 // --- MOUNT THE ROUTES ---
 app.use('/auth', authRoutes);

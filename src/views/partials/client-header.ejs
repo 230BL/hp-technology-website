@@ -17,10 +17,19 @@
         <nav class="container">
             <a href="/" class="logo-link">HP TECHNOLOGY</a>
             <ul class="nav-links">
+     
                 <li><a href="/">Home</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/contact">Contact Support</a></li>
-                <li><a href="/auth/login" class="nav-button">Login</a></li>
+                
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <li><span class="welcome-msg">Welcome, <%= user.name %></span></li>
+                    
+                    <li><a href="/auth/logout" class="nav-button logout-button">Log Out</a></li>
+                
+                <% } else { %>
+                    <li><a href="/auth/login" class="nav-button">Login</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>

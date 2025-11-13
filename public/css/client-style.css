@@ -110,6 +110,14 @@ h2 {
     width: 100%;
 }
 
+.welcome-msg {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    cursor: default; /* It's not a link */
+}
+
 .nav-button {
     background-color: var(--primary-color);
     color: #fff !important;
@@ -129,6 +137,19 @@ h2 {
 .nav-button::after {
     display: none; 
 }
+
+/* === UPDATED STYLES FOR RED LOGOUT BUTTON === */
+/* This is a more specific selector and will override .nav-button */
+.nav-button.logout-button {
+    background-color: #dc3545; /* Bootstrap's standard red */
+}
+
+.nav-button.logout-button:hover {
+    background-color: #c82333; /* A darker red for hover */
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
 
 /* 4. Main Content Area */
 main.container {
