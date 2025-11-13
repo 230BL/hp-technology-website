@@ -10,6 +10,14 @@ router.get('/login', authController.getLogin);
 // Process login form
 router.post('/login', authController.postLogin);
 
+// --- ADD THESE NEW ROUTES ---
+// Show registration page
+router.get('/register', authController.getRegister);
+
+// Process registration form
+router.post('/register', authController.postRegister);
+// --- END OF NEW ROUTES ---
+
 // Logout user
 router.get('/logout', authController.getLogout);
 

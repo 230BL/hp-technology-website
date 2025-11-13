@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page | HP Technology</title>
-    
+    <title>Sign Up | HP Technology</title>
     <link rel="stylesheet" href="/css/auth-style.css">
 </head>
 <body>
@@ -14,15 +13,20 @@
         <div class="logo-container">
             <img src="/images/hptech.png" alt="HP Technology Logo">
         </div>
-        <h2>Login Page</h2>
+        <h2>Create Account</h2>
 
         <% if (message && message.length > 0) { %>
-            <div class="<%'error-message' %>">
+            <div class="error-message">
                 <%= message %>
             </div>
         <% } %>
 
-        <form action="/auth/login" method="POST">
+        <form action="/auth/register" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+            </div>
+            
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="name@example.com" required>
@@ -31,13 +35,18 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
-            <button type="submit" class="login-button">Login</button>
+            <div class="form-group">
+                <label for="passwordConfirm">Confirm Password</label>
+                <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="login-button">Sign Up</button>
         </form>
 
         <div class="signup-link">
-            <p>Don't have an account? <a href="/auth/register">Sign Up</a></p>
+            <p>Already have an account? <a href="/auth/login">Login</a></p>
         </div>
-        </div>
+
+    </div>
 
     <%- include('../partials/footer') %>
 
